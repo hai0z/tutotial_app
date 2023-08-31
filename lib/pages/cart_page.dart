@@ -24,29 +24,25 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    var cartProvider = Provider.of<FruitShop>(context);
+    var cart = cartProvider.cartList;
+    double totalPrice = cart.fold(0, (previousValue, element) {
+      return previousValue + element.price;
+    });
     return Consumer<FruitShop>(
       builder: (context, value, child) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Column(
           children: [
-            const SizedBox(
-              height: 25,
-            ),
-            Text(
-              "Your Cart",
-              style: GoogleFonts.openSans(fontSize: 20),
-            ),
-            const SizedBox(
-              height: 25,
-            ),
             Expanded(
                 child: ListView.builder(
+              padding: const EdgeInsets.symmetric(vertical: 16),
               itemCount: value.cartList.length,
               itemBuilder: (context, index) {
                 Fruit eachFruit = value.cartList[index];
                 return Container(
                   decoration: BoxDecoration(
-                    color: Colors.grey[100],
+                    color: eachFruit.color[100],
                     borderRadius: BorderRadius.circular(10),
                   ),
                   margin: const EdgeInsets.only(bottom: 10),
@@ -55,7 +51,7 @@ class _CartPageState extends State<CartPage> {
                   child: ListTile(
                     title: Text(
                       eachFruit.name,
-                      style: const TextStyle(fontWeight: FontWeight.w700),
+                      style: GoogleFonts.lato(fontWeight: FontWeight.w700),
                     ),
                     leading: Image.asset(eachFruit.imgPath),
                     subtitle: Text(
@@ -69,7 +65,67 @@ class _CartPageState extends State<CartPage> {
                   ),
                 );
               },
-            ))
+            )),
+            Padding(
+              padding: const EdgeInsets.only(top: 24, bottom: 4),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                width: double.infinity,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Total Price",
+                          style: GoogleFonts.lato(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green[100]),
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          "\$${totalPrice.toStringAsFixed(2)}",
+                          style: const TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.green.shade100),
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Row(
+                          children: const [
+                            Text(
+                              "Pay now",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16,
+                              color: Colors.white,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),

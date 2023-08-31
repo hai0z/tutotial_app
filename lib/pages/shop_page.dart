@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tutotial_app/components/fruit_tile.dart';
 import 'package:tutotial_app/model/fruit.dart';
 import 'package:tutotial_app/model/fruit_shop.dart';
 import 'package:tutotial_app/pages/fruit_detail.dart';
@@ -25,21 +26,25 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     return Consumer<FruitShop>(
       builder: (context, value, child) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
               height: 25,
             ),
             Text(
               "How would you like your fruit?",
-              style: GoogleFonts.openSans(fontSize: 20),
+              style: GoogleFonts.lato(fontSize: 24),
             ),
             const SizedBox(
               height: 25,
             ),
             Expanded(
-                child: ListView.builder(
+                child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, childAspectRatio: 2 / 3),
               itemCount: value.listFruit.length,
               itemBuilder: (context, index) {
                 Fruit eachFruit = value.listFruit[index];
@@ -51,29 +56,11 @@ class _ShopPageState extends State<ShopPage> {
                             builder: (context) =>
                                 FruitDetail(fruit: eachFruit)));
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    margin: const EdgeInsets.only(bottom: 10),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 25, horizontal: 10),
-                    child: ListTile(
-                      title: Text(
-                        eachFruit.name,
-                        style: const TextStyle(fontWeight: FontWeight.w700),
-                      ),
-                      leading: Image.asset(eachFruit.imgPath),
-                      subtitle: Text(
-                        "\$${eachFruit.price}",
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                      ),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.add),
-                        onPressed: () => addToCart(eachFruit),
-                      ),
-                    ),
+                  child: FruitTile(
+                    fruit: eachFruit,
+                    onPressed: () {
+                      addToCart(eachFruit);
+                    },
                   ),
                 );
               },
