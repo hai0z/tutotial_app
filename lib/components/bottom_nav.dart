@@ -9,7 +9,7 @@ class BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.pink[300]),
+      decoration: BoxDecoration(color: Colors.deepPurple[300]),
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: GNav(
         onTabChange: (value) => onTabChange!(value),

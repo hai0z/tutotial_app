@@ -68,7 +68,7 @@ class _CartPageState extends State<CartPage> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
                 decoration: BoxDecoration(
-                  color: Colors.green,
+                  color: Colors.deepPurple.shade300,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 width: double.infinity,
@@ -82,7 +82,7 @@ class _CartPageState extends State<CartPage> {
                           "Total Price",
                           style: GoogleFonts.lato(
                               fontWeight: FontWeight.bold,
-                              color: Colors.green[100]),
+                              color: Colors.deepPurple.shade100),
                         ),
                         const SizedBox(
                           height: 4,
@@ -98,7 +98,8 @@ class _CartPageState extends State<CartPage> {
                       child: Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.green.shade100),
+                            border:
+                                Border.all(color: Colors.primaries[1].shade100),
                             borderRadius: BorderRadius.circular(12)),
                         child: Row(
                           children: const [

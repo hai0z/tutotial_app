@@ -20,9 +20,10 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<FruitShop>(
       create: (context) => FruitShop(),
-      builder: (context, child) => const MaterialApp(
+      builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: IntoPage(),
+        theme: ThemeData(primarySwatch: Colors.deepPurple),
+        home: const IntoPage(),
       ),
     );
   }

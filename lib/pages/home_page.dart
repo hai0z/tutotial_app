@@ -32,7 +32,6 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.pinkAccent,
         leading: const Icon(
           Icons.menu,
           size: 36,
