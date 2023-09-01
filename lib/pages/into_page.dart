@@ -40,7 +40,7 @@ class IntoPage extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                  color: Colors.deepPurple,
+                  color: Colors.primaries[1],
                   borderRadius: BorderRadius.circular(12)),
               child: Text(
                 "Get started",

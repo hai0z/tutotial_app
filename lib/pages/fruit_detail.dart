@@ -35,11 +35,14 @@ class FruitDetail extends StatelessWidget {
                 ),
               ),
               Center(
-                  child: Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Image.asset(
-                  fruit.imgPath,
-                  height: 250,
+                  child: Hero(
+                tag: fruit.name,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Image.asset(
+                    fruit.imgPath,
+                    height: 250,
+                  ),
                 ),
               )),
               const SizedBox(

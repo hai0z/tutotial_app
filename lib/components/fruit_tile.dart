@@ -6,8 +6,7 @@ import 'package:tutotial_app/model/fruit.dart';
 class FruitTile extends StatelessWidget {
   final Fruit fruit;
   final void Function()? onPressed;
-  const FruitTile({super.key, required this.fruit, required this.onPressed});
-
+  const FruitTile({super.key, required this.fruit, this.onPressed});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -40,10 +39,14 @@ class FruitTile extends StatelessWidget {
                 )
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 18),
-              child: Image.asset(
-                fruit.imgPath,
+            Hero(
+              tag: fruit.name,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 36, vertical: 18),
+                child: Image.asset(
+                  fruit.imgPath,
+                ),
               ),
             ),
             Text(

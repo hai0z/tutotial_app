@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:tutotial_app/components/cart_tile.dart';
 import 'package:tutotial_app/model/fruit.dart';
 import 'package:tutotial_app/model/fruit_shop.dart';
 
@@ -12,13 +13,25 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  void removeFromCart(Fruit fruit) {
+  final GlobalKey<AnimatedListState> _key = GlobalKey();
+
+  void removeFromCart(Fruit fruit, int index) {
+    _key.currentState!.removeItem(index, (context, animation) {
+      return SlideTransition(
+        position: Tween<Offset>(
+          begin: const Offset(1, 0),
+          end: Offset.zero,
+        ).animate(animation),
+        child: CartTile(fruit: fruit),
+      );
+    }, duration: const Duration(milliseconds: 500));
+
     Provider.of<FruitShop>(context, listen: false).deleteFromCart(fruit);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: const Text('Remove success'),
-      backgroundColor: Colors.amber[700],
+      backgroundColor: Colors.primaries[1],
       duration: const Duration(milliseconds: 250),
-      elevation: 3,
+      elevation: 1,
     ));
   }
 
@@ -35,34 +48,17 @@ class _CartPageState extends State<CartPage> {
         child: Column(
           children: [
             Expanded(
-                child: ListView.builder(
+                child: AnimatedList(
+              key: _key,
+              initialItemCount: value.cartList.length,
               padding: const EdgeInsets.symmetric(vertical: 16),
-              itemCount: value.cartList.length,
-              itemBuilder: (context, index) {
+              itemBuilder: (context, index, animation) {
                 Fruit eachFruit = value.cartList[index];
-                return Container(
-                  decoration: BoxDecoration(
-                    color: eachFruit.color[100],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
-                  child: ListTile(
-                    title: Text(
-                      eachFruit.name,
-                      style: GoogleFonts.lato(fontWeight: FontWeight.w700),
-                    ),
-                    leading: Image.asset(eachFruit.imgPath),
-                    subtitle: Text(
-                      "\$${eachFruit.price}",
-                      style: const TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.remove_shopping_cart),
-                      onPressed: () => removeFromCart(eachFruit),
-                    ),
-                  ),
+                return CartTile(
+                  fruit: eachFruit,
+                  onPress: () {
+                    removeFromCart(eachFruit, index);
+                  },
                 );
               },
             )),

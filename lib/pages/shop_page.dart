@@ -17,7 +17,7 @@ class _ShopPageState extends State<ShopPage> {
     Provider.of<FruitShop>(context, listen: false).addToCart(fruit);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: const Text('Added to cart'),
-      backgroundColor: Colors.amber[700],
+      backgroundColor: Colors.primaries[1],
       duration: const Duration(milliseconds: 250),
     ));
   }
@@ -42,29 +42,32 @@ class _ShopPageState extends State<ShopPage> {
               height: 25,
             ),
             Expanded(
-                child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, childAspectRatio: 2 / 3),
-              itemCount: value.listFruit.length,
-              itemBuilder: (context, index) {
-                Fruit eachFruit = value.listFruit[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                FruitDetail(fruit: eachFruit)));
-                  },
-                  child: FruitTile(
-                    fruit: eachFruit,
-                    onPressed: () {
-                      addToCart(eachFruit);
+              child: GridView.builder(
+                cacheExtent: 10,
+                physics: const BouncingScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2 / 3,
+                ),
+                itemCount: value.listFruit.length,
+                itemBuilder: (context, index) {
+                  Fruit eachFruit = value.listFruit[index];
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => FruitDetail(fruit: eachFruit),
+                      ));
                     },
-                  ),
-                );
-              },
-            ))
+                    child: FruitTile(
+                      fruit: eachFruit,
+                      onPressed: () {
+                        addToCart(eachFruit);
+                      },
+                    ),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),

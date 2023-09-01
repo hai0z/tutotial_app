@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tutotial_app/model/fruit.dart';
 
-class FruitShop extends ChangeNotifier {
+class FruitShop with ChangeNotifier {
   final List<Fruit> _shop = [
     Fruit(
         name: "Apple",
