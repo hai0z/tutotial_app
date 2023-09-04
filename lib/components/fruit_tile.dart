@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tutotial_app/model/fruit.dart';
 
 class FruitTile extends StatelessWidget {
   final Fruit fruit;
   final void Function()? onPressed;
+
   const FruitTile({super.key, required this.fruit, this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,8 +44,7 @@ class FruitTile extends StatelessWidget {
             Hero(
               tag: fruit.name,
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 36, vertical: 18),
+                padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 16.w),
                 child: Image.asset(
                   fruit.imgPath,
                 ),
@@ -52,10 +53,10 @@ class FruitTile extends StatelessWidget {
             Text(
               fruit.name,
               style:
-                  GoogleFonts.lato(fontSize: 16, fontWeight: FontWeight.bold),
+                  GoogleFonts.lato(fontSize: 16.w, fontWeight: FontWeight.bold),
             ),
             Padding(
-              padding: const EdgeInsets.all(8),
+              padding: EdgeInsets.all(8.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,

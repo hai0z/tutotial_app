@@ -5,6 +5,7 @@ import 'package:tutotial_app/model/fruit.dart';
 class CartTile extends StatelessWidget {
   final Fruit fruit;
   final void Function()? onPress;
+
   const CartTile({super.key, required this.fruit, this.onPress});
 
   @override
@@ -15,7 +16,7 @@ class CartTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: ListTile(
         title: Text(
           fruit.name,

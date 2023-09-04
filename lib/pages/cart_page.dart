@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:tutotial_app/components/cart_tile.dart';
 import 'package:tutotial_app/model/fruit.dart';
@@ -27,10 +28,10 @@ class _CartPageState extends State<CartPage> {
     }, duration: const Duration(milliseconds: 500));
 
     Provider.of<FruitShop>(context, listen: false).deleteFromCart(fruit);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: const Text('Remove success'),
-      backgroundColor: Colors.primaries[1],
-      duration: const Duration(milliseconds: 250),
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text('Remove success'),
+      backgroundColor: Colors.deepPurple,
+      duration: Duration(milliseconds: 250),
       elevation: 1,
     ));
   }
@@ -52,6 +53,7 @@ class _CartPageState extends State<CartPage> {
               key: _key,
               initialItemCount: value.cartList.length,
               padding: const EdgeInsets.symmetric(vertical: 16),
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index, animation) {
                 Fruit eachFruit = value.cartList[index];
                 return CartTile(
@@ -63,7 +65,7 @@ class _CartPageState extends State<CartPage> {
               },
             )),
             Padding(
-              padding: const EdgeInsets.only(top: 24, bottom: 4),
+              padding: const EdgeInsets.only(top: 4, bottom: 4),
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 24, horizontal: 8),

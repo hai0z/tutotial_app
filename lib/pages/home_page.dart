@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tutotial_app/model/fruit_shop.dart';
 import 'package:tutotial_app/pages/shop_page.dart';
+
 import '../components/bottom_nav.dart';
 import 'cart_page.dart';
 
@@ -46,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.white,
       body: pages[_selectedIndex],
     );
   }
